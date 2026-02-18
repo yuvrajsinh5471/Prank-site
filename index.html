@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hall Ticket Portal</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            color: lime;
+            font-family: monospace;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 25px;
+            border: 2px solid lime;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: lime;
+            transition: width 0.3s;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .big-text {
+            font-size: 28px;
+            color: red;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hall Ticket Download Portal</h1>
+    <button onclick="startDownload()">Download Hall Ticket</button>
+
+    <div id="downloadSection" class="hidden">
+        <p>Downloading your file...</p>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
+    <div id="prankMessage" class="hidden">
+        <p class="big-text">⚠ SYSTEM ALERT ⚠</p>
+        <p>Your phone is being scanned...</p>
+    </div>
+
+    <div id="finalMessage" class="hidden">
+        <h2>😂 GOT YOU!</h2>
+        <p>Your phone is safe. This was just a prank.</p>
+    </div>
+</div>
+
+<script>
+function startDownload() {
+    document.getElementById("downloadSection").classList.remove("hidden");
+    let progress = document.getElementById("progress");
+    let width = 0;
+
+    let interval = setInterval(function() {
+        width += 5;
+        progress.style.width = width + "%";
+
+        if (width >= 100) {
+            clearInterval(interval);
+            document.getElementById("prankMessage").classList.remove("hidden");
+
+            setTimeout(function() {
+                document.getElementById("finalMessage").classList.remove("hidden");
+            }, 3000);
+        }
+    }, 200);
+}
+</script>
+
+</body>
+</html>

@@ -1,78 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hall Ticket Portal</title>
-    <style>
-        body {
-            margin: 0;
-            background: black;
-            color: lime;
-            font-family: monospace;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examination Hall Ticket Portal</title>
 
-        .container {
-            margin-top: 100px;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
 
-        .progress-bar {
-            width: 80%;
-            height: 25px;
-            border: 2px solid lime;
-            margin: 20px auto;
-            position: relative;
-        }
+.header {
+    background: #003366;
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
 
-        .progress {
-            height: 100%;
-            width: 0%;
-            background: lime;
-            transition: width 0.3s;
-        }
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
 
-        .hidden {
-            display: none;
-        }
+label {
+    font-size: 16px;
+    font-weight: bold;
+}
 
-        .big-text {
-            font-size: 28px;
-            color: red;
-        }
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0055aa;
+}
+
+.progress-box {
+    display: none;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: #28a745;
+    transition: width 0.3s;
+}
+
+.message {
+    display: none;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+</style>
 </head>
+
 <body>
 
+<div class="header">
+Examination Hall Ticket Download Portal
+</div>
+
 <div class="container">
-    <h1>Hall Ticket Download Portal</h1>
-    <button onclick="startDownload()">Download Hall Ticket</button>
 
-    <div id="downloadSection" class="hidden">
-        <p>Downloading your file...</p>
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
-        </div>
-    </div>
+<label>Seat Number</label>
+<input type="text" placeholder="Enter Seat Number">
 
-    <div id="prankMessage" class="hidden">
-        <p class="big-text">⚠ SYSTEM ALERT ⚠</p>
-        <p>Your phone is being scanned...</p>
-    </div>
+<button onclick="startProcess()">Download Hall Ticket</button>
 
-    <div id="finalMessage" class="hidden">
-        <h2>😂 GOT YOU!</h2>
-        <p>Your phone is safe. This was just a prank.</p>
-    </div>
+<div class="progress-box" id="progressBox">
+<p style="font-size:16px;">Processing request...</p>
+<div class="progress-bar">
+<div class="progress" id="progress"></div>
+</div>
+</div>
+
+<div class="message" id="finalMessage">
+⚠ Device Scan Completed<br><br>
+😂 Relax! This is just a prank.
+</div>
+
 </div>
 
 <script>
-function startDownload() {
-    document.getElementById("downloadSection").classList.remove("hidden");
+function startProcess() {
+    document.getElementById("progressBox").style.display = "block";
     let progress = document.getElementById("progress");
     let width = 0;
 
@@ -82,11 +130,7 @@ function startDownload() {
 
         if (width >= 100) {
             clearInterval(interval);
-            document.getElementById("prankMessage").classList.remove("hidden");
-
-            setTimeout(function() {
-                document.getElementById("finalMessage").classList.remove("hidden");
-            }, 3000);
+            document.getElementById("finalMessage").style.display = "block";
         }
     }, 200);
 }
@@ -94,3 +138,4 @@ function startDownload() {
 
 </body>
 </html>
+
